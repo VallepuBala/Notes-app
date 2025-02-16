@@ -1,0 +1,96 @@
+/* Login Container */
+.login-container {
+  width: 90%;
+  max-width: 400px;
+  background: rgba(10, 10, 10, 0.988);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+  margin: auto;
+  margin-top: 50px;
+}
+
+h2 {
+  color: #fff;
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 16px;
+}
+
+.login-container input::placeholder {
+  color: #ddd;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #5ab2ff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-container button:hover {
+  background: #088f16;
+  transform: scale(1.05);
+}
+
+.login-container p {
+  color: white;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.login-container p a {
+  font-weight: bolder;
+  color: #f02121;
+  text-decoration: none;
+}
+
+.login-container p a:hover {
+  text-decoration: underline;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .login-container {
+    width: 95%;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  input, button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

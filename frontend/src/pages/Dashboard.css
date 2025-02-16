@@ -1,0 +1,216 @@
+/* Dashboard Container */
+.dashboard-container {
+  width: 90%;
+  max-width: 800px;
+  background: #1F260F;
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+  margin: auto;
+  margin-top: 50px;
+}
+
+/* Logout Button */
+.logout-btn {
+  position: absolute;
+  top: 10px;
+  right: 4px;
+  padding: 8px 8px;
+  background: #ff5a5f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.logout-btn:hover {
+  background: #d64045;
+  transform: scale(1.05);
+}
+
+h2 {
+  color: #fff;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+/* Logout Button */
+.dashboard-container button {
+  background: #B5BF65;
+  color: white;
+}
+
+.dashboard-container button:hover {
+  background: #d64045;
+  transform: scale(1.05);
+}
+
+/* Notes List */
+.notes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+/* Note Card */
+.note-card {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.note-card:hover {
+  transform: translateY(-5px);
+}
+
+.note-card h3 {
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.note-card p {
+  color: #ddd;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.note-card .category {
+  font-size: 12px;
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+.note-card button {
+  background: #B5BF65;
+  padding: 6px 12px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.note-card button:hover {
+  background: #d64045;
+}
+
+/* No Notes Message */
+.no-notes {
+  color: #fff;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .dashboard-container {
+    width: 95%;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  input, textarea, select, button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* Add Note Form */
+.add-note-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 16px;
+}
+
+textarea {
+  height: 100px;
+  resize: none;
+}
+
+/* Arrange Textarea and Select */
+.textarea-select-container {
+  display: flex;
+  gap: 10px;
+}
+
+.textarea-select-container textarea {
+  flex: 2;
+}
+
+.textarea-select-container select {
+  flex: 1;
+}
+
+/* Button */
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #EDF2C2;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background: #EDF2C2;
+  transform: scale(1.05);
+}
+
+/* Notes List */
+.notes-list {
+  margin-top: 20px;
+}
+
+.note-card {
+  border: 1px solid white;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.note-card:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .textarea-select-container {
+    flex-direction: column;
+  }
+}
