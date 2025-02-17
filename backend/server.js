@@ -1,57 +1,45 @@
 const express = require('express');
-const Database = require('better-sqlite3');
+const sqlite3 = require('sqlite3').verbose();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const cors = require("cors");
+const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 const PORT = 5000;
 const SECRET_KEY = process.env.SECRET_KEY || 'your_secret_key';
 
 app.use(express.json());
-app.use(cors({
-    origin: "https://notes-app-jet-xi.vercel.app", // Replace with your Vercel frontend URL
-    credentials: true
-}));
+app.use(cors());
 
 // Initialize SQLite Database
-const path = require('path');
+const db = new sqlite3.Database('./notes.db', (err) => {
+    if (err) console.error(err.message);
+    else console.log('Connected to SQLite database');
+});
 
-const dbPath = path.join(__dirname, 'notes.db'); // Ensures the correct path
+// Create Users Table
+db.run(`CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    email TEXT UNIQUE,
+    password TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+)`);
 
-try {
-    const db = new Database(dbPath);
-    console.log('Connected to SQLite database');
-
-    // Enable foreign keys (Important for referential integrity)
-    db.pragma('foreign_keys = ON');
-
-    // Create Users Table
-    db.exec(`CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        email TEXT UNIQUE,
-        password TEXT,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )`);
-
-    // Create Notes Table
-    db.exec(`CREATE TABLE IF NOT EXISTS notes (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT,
-        content TEXT,
-        category TEXT,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        pinned BOOLEAN DEFAULT 0,
-        archived BOOLEAN DEFAULT 0,
-        user_id INTEGER,
-        FOREIGN KEY (user_id) REFERENCES users (id)
-    )`);
-} catch (err) {
-    console.error('Error connecting to SQLite database:', err.message);
-}
-
+// Create Notes Table
+db.run(`CREATE TABLE IF NOT EXISTS notes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT,
+    content TEXT,
+    category TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    pinned BOOLEAN DEFAULT 0,
+    archived BOOLEAN DEFAULT 0,
+    user_id INTEGER,
+    FOREIGN KEY (user_id) REFERENCES users (id)
+)`);
 
 // User Signup
 app.post('/signup', async (req, res) => {
