@@ -1,5 +1,5 @@
 const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
+const Database = require('better-sqlite3');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 // Initialize SQLite Database
-const db = new sqlite3.Database('./notes.db', (err) => {
+const db = new Database('./notes.db', (err) => {
     if (err) console.error(err.message);
     else console.log('Connected to SQLite database');
 });
