@@ -2,8 +2,12 @@ const express = require('express');
 const Database = require('better-sqlite3');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const cors = require('cors');
-require('dotenv').config();
+const cors = require("cors");
+
+app.use(cors({
+    origin: "https://notes-app-jet-xi.vercel.app", // Replace with your Vercel frontend URL
+    credentials: true
+}));
 
 const app = express();
 const PORT = 5000;
