@@ -18,7 +18,7 @@ function Dashboard() {
         return;
       }
 
-      const response = await fetch("https://notes-app-wk5a.onrender.com/notes", {
+      const response = await fetch("http://localhost:5000/notes", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -35,7 +35,7 @@ function Dashboard() {
     e.preventDefault();
     const token = localStorage.getItem("token");
 
-    const response = await fetch("https://notes-app-wk5a.onrender.com/notes", {
+    const response = await fetch("http://localhost:5000/notes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +58,7 @@ function Dashboard() {
   const handleDeleteNote = async (id) => {
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`https://notes-app-wk5a.onrender.com/notes/${id}`, {
+    const response = await fetch(`http://localhost:5000/notes/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });

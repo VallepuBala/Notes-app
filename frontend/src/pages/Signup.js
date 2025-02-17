@@ -11,9 +11,8 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("https://notes-app-wk5a.onrender.com/signup", {
+    const response = await fetch("http://localhost:5000/signup", {
       method: "POST",
-      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }),
     });
