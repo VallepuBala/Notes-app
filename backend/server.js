@@ -4,17 +4,15 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const cors = require("cors");
 
-app.use(cors({
-    origin: "https://notes-app-jet-xi.vercel.app", // Replace with your Vercel frontend URL
-    credentials: true
-}));
-
 const app = express();
 const PORT = 5000;
 const SECRET_KEY = process.env.SECRET_KEY || 'your_secret_key';
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "https://notes-app-jet-xi.vercel.app", // Replace with your Vercel frontend URL
+    credentials: true
+}));
 
 // Initialize SQLite Database
 const path = require('path');
