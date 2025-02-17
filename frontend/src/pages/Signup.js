@@ -13,6 +13,7 @@ function Signup() {
 
     const response = await fetch("https://notes-app-wk5a.onrender.com/signup", {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }),
     });

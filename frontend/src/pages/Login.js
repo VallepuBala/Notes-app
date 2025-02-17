@@ -13,6 +13,7 @@ function Login({ setIsAuthenticated }) {
 
     const response = await fetch("https://notes-app-wk5a.onrender.com/login", {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
