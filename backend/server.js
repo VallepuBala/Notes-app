@@ -13,33 +13,43 @@ app.use(express.json());
 app.use(cors());
 
 // Initialize SQLite Database
-const db = new Database('./notes.db', (err) => {
-    if (err) console.error(err.message);
-    else console.log('Connected to SQLite database');
-});
+const path = require('path');
 
-// Create Users Table
-db.run(`CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    email TEXT UNIQUE,
-    password TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-)`);
+const dbPath = path.join(__dirname, 'notes.db'); // Ensures the correct path
 
-// Create Notes Table
-db.run(`CREATE TABLE IF NOT EXISTS notes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT,
-    content TEXT,
-    category TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    pinned BOOLEAN DEFAULT 0,
-    archived BOOLEAN DEFAULT 0,
-    user_id INTEGER,
-    FOREIGN KEY (user_id) REFERENCES users (id)
-)`);
+try {
+    const db = new Database(dbPath);
+    console.log('Connected to SQLite database');
+
+    // Enable foreign keys (Important for referential integrity)
+    db.pragma('foreign_keys = ON');
+
+    // Create Users Table
+    db.exec(`CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        email TEXT UNIQUE,
+        password TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )`);
+
+    // Create Notes Table
+    db.exec(`CREATE TABLE IF NOT EXISTS notes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT,
+        content TEXT,
+        category TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        pinned BOOLEAN DEFAULT 0,
+        archived BOOLEAN DEFAULT 0,
+        user_id INTEGER,
+        FOREIGN KEY (user_id) REFERENCES users (id)
+    )`);
+} catch (err) {
+    console.error('Error connecting to SQLite database:', err.message);
+}
+
 
 // User Signup
 app.post('/signup', async (req, res) => {
